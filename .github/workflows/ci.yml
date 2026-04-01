@@ -127,14 +127,14 @@ jobs:
           if [ "$IS_PRERELEASE" = true ]; then
             prerelease="--prerelease"
           fi
-          gh release create ${{ github.ref }} \
+          gh release create ${{ github.ref_name }} \
                             --title "${{ env.RELEASE_NAME }}" \
                             $notes \
                             $prerelease
     - name: Upload Pyodide wheel to GitHub release
       run: |
         if [ -d dist-pyodide ] && [ "$(ls -A dist-pyodide)" ]; then
-          gh release upload ${{ github.ref }} dist-pyodide/*.whl
+          gh release upload ${{ github.ref_name }} dist-pyodide/*.whl
         fi
     - name: Build sdist
       run: |
